@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fayoum Center Advising</title>
+
+  <!-- Main stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- SheetJS (xlsx) library, loaded from CDN, used to parse students.xlsx in the browser -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+</head>
+<body>
+
+  <!-- ================= HEADER ================= -->
+  <header class="site-header">
+    <div class="header-inner">
+      <!-- Logo placeholder: replace src with your institution's real logo -->
+      <div class="logo-wrap">
+        <div class="logo-placeholder" aria-hidden="true">🎓</div>
+        <div class="header-text">
+          <h1>Fayoum Center Advising</h1>
+          <p class="subtitle">يمكنك إيجاد مرشدك الأكاديمي بسهولة</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= MAIN CONTENT ================= -->
+  <main class="main-content">
+
+    <!-- ---------- Search Card ---------- -->
+    <section class="search-card" aria-labelledby="search-title">
+      <h2 id="search-title">ابحث بالرقم الجامعي الخاص بك</h2>
+      <p class="helper-text">ادخل الرقم الجامعي بطريقة صحيحة</p>
+
+      <form id="searchForm" class="search-form" autocomplete="off" novalidate>
+        <label for="studentId" class="visually-hidden">Student ID</label>
+        <input
+          type="text"
+          id="studentId"
+          name="studentId"
+          placeholder="e.g. 2512345"
+          inputmode="text"
+        />
+        <button type="submit" id="searchBtn">
+          <span class="btn-text">بحث</span>
+        </button>
+      </form>
+
+      <!-- Inline validation / error message for empty or invalid input -->
+      <p id="inputError" class="input-error" role="alert"></p>
+    </section>
+
+    <!-- ---------- Result Card (Success) ---------- -->
+    <section id="resultCard" class="result-card" hidden aria-live="polite">
+      <div class="result-card-header">
+        <span class="result-icon">✅</span>
+        <h2>بيانات المرشد الأكاديمي</h2>
+      </div>
+      <dl class="result-grid">
+        <div class="result-row">
+          <dt>Student ID</dt>
+          <dd id="resStudentId"></dd>
+        </div>
+        <div class="result-row">
+          <dt>Student Name</dt>
+          <dd id="resStudentName"></dd>
+        </div>
+        <div class="result-row">
+          <dt>المرشد الأكاديمي</dt>
+          <dd id="resAdvisorName"></dd>
+        </div>
+        <div class="result-row">
+          <dt>ميل المرشد الأكاديمي</dt>
+          <dd id="resAdvisorEmail"></dd>
+        </div>
+      </dl>
+      <!-- Lets the student clear the result and search again -->
+      <button type="button" id="newSearchBtnResult" class="new-search-btn">New Search</button>
+    </section>
+
+    <!-- ---------- Not Found Message ---------- -->
+    <section id="notFoundCard" class="not-found-card" hidden aria-live="polite">
+      <span class="result-icon">⚠️</span>
+      <h2>لا يوجد بيانات</h2>
+      <p>لم نجد أي بيانات خاصة بالرقم الجامعي .. يرجى التحقق من الرقم و إعادة المحاولة </p>
+      <button type="button" id="newSearchBtnNotFound" class="new-search-btn">New Search</button>
+    </section>
+
+    <!-- ---------- Data Load Error Message ---------- -->
+    <section id="dataErrorCard" class="data-error-card" hidden>
+      <span class="result-icon">❌</span>
+      <h2>Unable to Load Student Data</h2>
+      <p>The student records file (<code>students.xlsx</code>) could not be loaded. Please make sure the file exists in the same folder as this website and try refreshing the page.</p>
+    </section>
+
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="site-footer">
+    <p>&copy; <span id="year"></span> Fayoum Center Advising. All rights reserved.</p>
+  </footer>
+
+  <!-- Main application logic -->
+  <script src="script.js"></script>
+</body>
+</html>

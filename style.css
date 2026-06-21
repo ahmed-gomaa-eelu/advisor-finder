@@ -1,0 +1,407 @@
+/* =========================================================
+   ACADEMIC ADVISOR FINDER - STYLESHEET
+   Mobile-first, responsive, modern card-based design
+   ========================================================= */
+
+/* ---- CSS Variables (theme colors, spacing, shadows) ---- */
+:root {
+  --color-primary: #1d4ed8;       /* main brand blue */
+  --color-primary-dark: #1e3a8a;
+  --color-primary-light: #eff6ff;
+  --color-success: #15803d;
+  --color-success-bg: #f0fdf4;
+  --color-error: #b91c1c;
+  --color-error-bg: #fef2f2;
+  --color-text: #1f2937;
+  --color-text-muted: #6b7280;
+  --color-bg: #f3f4f6;
+  --color-card-bg: #ffffff;
+  --color-border: #e5e7eb;
+
+  --radius-md: 10px;
+  --radius-lg: 16px;
+
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.12);
+
+  --transition: all 0.2s ease-in-out;
+}
+
+/* ---- Reset / base ---- */
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.5;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+h1, h2 {
+  margin: 0 0 0.25rem 0;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+p {
+  margin: 0 0 0.75rem 0;
+  color: var(--color-text-muted);
+}
+
+/* Utility class for visually-hidden but screen-reader accessible labels */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+.site-header {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+  color: #fff;
+  padding: 1.5rem 1rem;
+  box-shadow: var(--shadow-md);
+}
+
+.header-inner {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.logo-wrap {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Logo placeholder - swap this div (or its emoji) for an <img> tag with your real logo */
+.logo-placeholder {
+  width: 56px;
+  height: 56px;
+  flex-shrink: 0;
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.75rem;
+}
+
+.header-text h1 {
+  color: #fff;
+  font-size: 1.4rem;
+}
+
+.header-text .subtitle {
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+/* =========================================================
+   MAIN LAYOUT
+   ========================================================= */
+.main-content {
+  flex: 1;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3rem;
+}
+
+/* =========================================================
+   SEARCH CARD
+   ========================================================= */
+.search-card {
+  background: var(--color-card-bg);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: 1.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.search-card h2 {
+  font-size: 1.15rem;
+}
+
+.helper-text {
+  font-size: 0.9rem;
+}
+
+.search-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+#studentId {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-md);
+  transition: var(--transition);
+  background-color: #fafafa;
+}
+
+#studentId:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  background-color: #fff;
+  box-shadow: 0 0 0 3px var(--color-primary-light);
+}
+
+#searchBtn {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  background-color: var(--color-primary);
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+#searchBtn:hover {
+  background-color: var(--color-primary-dark);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+#searchBtn:active {
+  transform: translateY(0);
+}
+
+#searchBtn:disabled {
+  background-color: #9ca3af;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Inline error text under the input (e.g. "Please enter a Student ID") */
+.input-error {
+  color: var(--color-error);
+  font-size: 0.85rem;
+  margin: 0.5rem 0 0;
+  min-height: 1.1rem;
+}
+
+/* =========================================================
+   LOADING INDICATOR
+   ========================================================= */
+.loading-indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 2rem;
+  color: var(--color-text-muted);
+}
+
+.spinner {
+  width: 36px;
+  height: 36px;
+  border: 4px solid var(--color-border);
+  border-top-color: var(--color-primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* =========================================================
+   RESULT CARD (success)
+   ========================================================= */
+.result-card {
+  background: var(--color-success-bg);
+  border: 1px solid #bbf7d0;
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+  box-shadow: var(--shadow-md);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.result-card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+}
+
+.result-card-header h2 {
+  color: var(--color-success);
+  font-size: 1.15rem;
+}
+
+.result-icon {
+  font-size: 1.4rem;
+}
+
+.result-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+  margin: 0;
+}
+
+.result-row {
+  background-color: #fff;
+  border-radius: var(--radius-md);
+  padding: 0.75rem 1rem;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+}
+
+.result-row:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.result-row dt {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-text-muted);
+  margin-bottom: 0.2rem;
+}
+
+.result-row dd {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--color-text);
+  word-break: break-word;
+}
+
+/* =========================================================
+   NOT FOUND / DATA ERROR CARDS
+   ========================================================= */
+.not-found-card,
+.data-error-card {
+  background: var(--color-error-bg);
+  border: 1px solid #fecaca;
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+  text-align: center;
+  box-shadow: var(--shadow-md);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.not-found-card h2,
+.data-error-card h2 {
+  color: var(--color-error);
+  font-size: 1.1rem;
+  margin-top: 0.5rem;
+}
+
+.not-found-card .result-icon,
+.data-error-card .result-icon {
+  font-size: 2rem;
+}
+
+.data-error-card code {
+  background-color: #fee2e2;
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+}
+
+/* "New Search" button shown inside the result / not-found cards,
+   letting the student reset the view without refreshing the page. */
+.new-search-btn {
+  display: inline-block;
+  margin-top: 1.25rem;
+  padding: 0.6rem 1.25rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  background-color: #fff;
+  border: 2px solid var(--color-primary);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.new-search-btn:hover {
+  background-color: var(--color-primary);
+  color: #fff;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+.site-footer {
+  text-align: center;
+  padding: 1.25rem 1rem;
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+/* =========================================================
+   RESPONSIVE: tablet and up
+   ========================================================= */
+@media (min-width: 600px) {
+  .search-form {
+    flex-direction: row;
+  }
+
+  #studentId {
+    flex: 1;
+  }
+
+  #searchBtn {
+    width: auto;
+    min-width: 130px;
+  }
+
+  .result-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .header-text h1 {
+    font-size: 1.7rem;
+  }
+}
+
+/* =========================================================
+   RESPONSIVE: desktop
+   ========================================================= */
+@media (min-width: 900px) {
+  .main-content {
+    padding-top: 2.5rem;
+  }
+
+  .search-card,
+  .result-card,
+  .not-found-card,
+  .data-error-card {
+    padding: 2.25rem;
+  }
+}
